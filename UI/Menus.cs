@@ -697,7 +697,7 @@ public class Menus
     private void AgregarCurso()
     {
         Consola.Subtitulo("AGREGAR CURSO");
-        string codigo = Consola.LeerTexto("Código del curso (ej.: IS-701): ").ToUpper();
+        string codigo = Consola.LeerTexto("Código del curso (ej.: ISI-X-08): ").ToUpper();
         int carreraId = ElegirCarrera();
         string nombre = Consola.LeerTexto("Nombre del curso: ");
         int creditos = Consola.LeerEntero("Créditos: ", 1, 30);
@@ -779,7 +779,7 @@ public class Menus
     private void AgregarGrupo()
     {
         Consola.Subtitulo("AGREGAR GRUPO");
-        string codigo = Consola.LeerTexto("Código del grupo (ej.: G-IS701R): ").ToUpper();
+        string codigo = Consola.LeerTexto("Código del grupo (ej.: G-X08R): ").ToUpper();
 
         ListarCursos();
         string curso = Consola.LeerTexto("Código del curso: ").ToUpper();
