@@ -10,12 +10,16 @@ namespace SistemaGestionEstudiantil.Datos;
 ///    Universidades (CNU) y universidades privadas reconocidas, con su
 ///    ciudad y año de fundación (solo cuando el dato está verificado
 ///    en fuentes oficiales o enciclopédicas).
-/// 2. Pénsum real de la carrera Ingeniería de Sistemas de la UNI
-///    (Facultad de Ciencias y Sistemas): Introducción a la Programación,
-///    Programación I y II, Base de Datos I y II, Ingeniería de Software,
-///    Sistemas Operativos, Redes, Inteligencia Artificial, etc.
-/// 3. Códigos reales de cursos de la UCYT (pénsum 2026-2030 de
-///    Ingeniería de Sistemas): IF-3900, IF-1100, IF-1400.
+/// 2. Pénsum marcado de la carrera Ingeniería en Sistemas de Información
+///    (ISI) de la UNAN-León, Facultad de Ciencias y Tecnología: 10
+///    semestres y 64 asignaturas, con códigos ISI-I-01 a ISI-X-07.
+///    NOTA IMPORTANTE: la malla oficial completa no está publicada en
+///    línea; los nombres de las asignaturas, los prerrequisitos y los
+///    créditos de este archivo son PROPUESTOS y siguen el orden natural
+///    de los 10 semestres del plan de estudios.
+/// 3. Cursos de Ingeniería Civil de la UNI y códigos reales de la UCYT
+///    (pénsum 2026-2030 de Ingeniería de Sistemas): IF-3900, IF-1100,
+///    IF-1400.
 /// 4. Modalidades reales: regular (diurno/vespertino/sabatino) y
 ///    dominical, tal como se imparten en universidades nicaragüenses.
 /// 5. Formato real de cédula (XXX-XXXXXX-XXXXL) y de celular (8 dígitos).
@@ -52,7 +56,7 @@ public static class DatosIniciales
         s.Universidades.Add(new Universidad { Id = 7, Nombre = "Universidad Nicaragüense de Ciencia y Tecnología (UCYT)", Ciudad = "Managua", Tipo = "Privada", AnioFundacion = null });
         s.Universidades.Add(new Universidad { Id = 8, Nombre = "Bluefields Indian and Caribbean University (BICU)", Ciudad = "Bluefields", Tipo = "Pública", AnioFundacion = null });
 
-        s.Carreras.Add(new Carrera { Id = 1, UniversidadId = 3, Nombre = "Ingeniería de Sistemas", Duracion = "10 semestres" });
+        s.Carreras.Add(new Carrera { Id = 1, UniversidadId = 2, Nombre = "Ingeniería en Sistemas de Información (ISI)", Duracion = "10 semestres" });
         s.Carreras.Add(new Carrera { Id = 2, UniversidadId = 3, Nombre = "Ingeniería en Computación", Duracion = "10 semestres" });
         s.Carreras.Add(new Carrera { Id = 3, UniversidadId = 3, Nombre = "Ingeniería Civil", Duracion = "10 semestres" });
         s.Carreras.Add(new Carrera { Id = 4, UniversidadId = 2, Nombre = "Medicina y Cirugía", Duracion = "14 semestres" });
@@ -66,25 +70,95 @@ public static class DatosIniciales
     }
 
     // =====================================================================
-    //  Cursos (asignaturas reales del pénsum de la UNI y códigos de la UCYT)
+    //  Cursos del pénsum ISI (UNAN-León, 10 semestres, 64 asignaturas)
+    //  + cursos de Ing. Civil (UNI) y códigos reales de la UCYT.
+    //  Prerrequisitos y créditos PROPUESTOS (ver nota en el encabezado).
     // =====================================================================
     private static void CargarCursos(SistemaGestion s)
     {
-        // Ingeniería de Sistemas — UNI (pénsum real)
-        s.Cursos.Add(new Curso { Codigo = "IS-101", CarreraId = 1, Nombre = "Introducción a la Programación I", Creditos = 4, Prerrequisitos = { } });
-        s.Cursos.Add(new Curso { Codigo = "IS-102", CarreraId = 1, Nombre = "Matemática I", Creditos = 4, Prerrequisitos = { } });
-        s.Cursos.Add(new Curso { Codigo = "IS-103", CarreraId = 1, Nombre = "Inglés I", Creditos = 2, Prerrequisitos = { } });
-        s.Cursos.Add(new Curso { Codigo = "IS-201", CarreraId = 1, Nombre = "Programación I", Creditos = 4, Prerrequisitos = { "IS-101" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-202", CarreraId = 1, Nombre = "Matemática II", Creditos = 4, Prerrequisitos = { "IS-102" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-203", CarreraId = 1, Nombre = "Estadística I", Creditos = 3, Prerrequisitos = { "IS-202" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-301", CarreraId = 1, Nombre = "Programación II", Creditos = 4, Prerrequisitos = { "IS-201" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-302", CarreraId = 1, Nombre = "Base de Datos I", Creditos = 4, Prerrequisitos = { "IS-301" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-303", CarreraId = 1, Nombre = "Sistemas Operativos", Creditos = 4, Prerrequisitos = { "IS-301" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-401", CarreraId = 1, Nombre = "Base de Datos II", Creditos = 4, Prerrequisitos = { "IS-302" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-402", CarreraId = 1, Nombre = "Ingeniería de Software I", Creditos = 4, Prerrequisitos = { "IS-301", "IS-302" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-501", CarreraId = 1, Nombre = "Ingeniería de Software II", Creditos = 4, Prerrequisitos = { "IS-402" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-502", CarreraId = 1, Nombre = "Redes de Computadoras", Creditos = 4, Prerrequisitos = { "IS-303" } });
-        s.Cursos.Add(new Curso { Codigo = "IS-601", CarreraId = 1, Nombre = "Inteligencia Artificial", Creditos = 4, Prerrequisitos = { "IS-501" } });
+        // ---------- Semestre I ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-01", CarreraId = 1, Nombre = "Inglés Técnico I", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-02", CarreraId = 1, Nombre = "Técnicas de Estudio e Investigación", Creditos = 2, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-03", CarreraId = 1, Nombre = "Lenguaje y Comunicación", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-04", CarreraId = 1, Nombre = "Introducción a la Computación", Creditos = 4, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-05", CarreraId = 1, Nombre = "Matemática I", Creditos = 4, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-06", CarreraId = 1, Nombre = "Historia de Nicaragua", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-I-07", CarreraId = 1, Nombre = "Educación Física y Deporte", Creditos = 2, Prerrequisitos = { } });
+
+        // ---------- Semestre II ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-01", CarreraId = 1, Nombre = "Fundamentos de Programación", Creditos = 4, Prerrequisitos = { "ISI-I-04" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-02", CarreraId = 1, Nombre = "Inglés Técnico II", Creditos = 3, Prerrequisitos = { "ISI-I-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-03", CarreraId = 1, Nombre = "Cálculo I", Creditos = 4, Prerrequisitos = { "ISI-I-05" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-04", CarreraId = 1, Nombre = "Contabilidad Básica", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-05", CarreraId = 1, Nombre = "Lógica y Matemática Discreta", Creditos = 4, Prerrequisitos = { "ISI-I-05" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-06", CarreraId = 1, Nombre = "Comunicación y Sociedad", Creditos = 3, Prerrequisitos = { "ISI-I-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-II-07", CarreraId = 1, Nombre = "Metodología de la Investigación", Creditos = 3, Prerrequisitos = { "ISI-I-02" } });
+
+        // ---------- Semestre III ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-01", CarreraId = 1, Nombre = "Diseño de Bases de Datos", Creditos = 4, Prerrequisitos = { "ISI-II-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-02", CarreraId = 1, Nombre = "Desarrollo de Aplicaciones I", Creditos = 4, Prerrequisitos = { "ISI-II-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-03", CarreraId = 1, Nombre = "Estructuras de Datos y Algoritmos", Creditos = 4, Prerrequisitos = { "ISI-II-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-04", CarreraId = 1, Nombre = "Cálculo II", Creditos = 4, Prerrequisitos = { "ISI-II-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-05", CarreraId = 1, Nombre = "Género en la Vida Cotidiana", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-06", CarreraId = 1, Nombre = "Electrónica", Creditos = 4, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-III-07", CarreraId = 1, Nombre = "Inglés Técnico III", Creditos = 3, Prerrequisitos = { "ISI-II-02" } });
+
+        // ---------- Semestre IV ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-01", CarreraId = 1, Nombre = "Programación de Bases de Datos", Creditos = 4, Prerrequisitos = { "ISI-III-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-02", CarreraId = 1, Nombre = "Desarrollo de Aplicaciones II", Creditos = 4, Prerrequisitos = { "ISI-III-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-03", CarreraId = 1, Nombre = "Sistemas Electrónicos", Creditos = 4, Prerrequisitos = { "ISI-III-06" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-04", CarreraId = 1, Nombre = "Investigación I", Creditos = 3, Prerrequisitos = { "ISI-II-07" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-05", CarreraId = 1, Nombre = "Estadística General", Creditos = 4, Prerrequisitos = { "ISI-III-04" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-06", CarreraId = 1, Nombre = "Programación Web", Creditos = 4, Prerrequisitos = { "ISI-III-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IV-07", CarreraId = 1, Nombre = "Inglés Técnico IV", Creditos = 3, Prerrequisitos = { "ISI-III-07" } });
+
+        // ---------- Semestre V ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-V-01", CarreraId = 1, Nombre = "Ingeniería del Software I", Creditos = 4, Prerrequisitos = { "ISI-III-02", "ISI-III-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-V-02", CarreraId = 1, Nombre = "Administración de Bases de Datos", Creditos = 4, Prerrequisitos = { "ISI-IV-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-V-03", CarreraId = 1, Nombre = "Arquitectura de Computadoras", Creditos = 4, Prerrequisitos = { "ISI-IV-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-V-04", CarreraId = 1, Nombre = "Investigación II", Creditos = 3, Prerrequisitos = { "ISI-IV-04" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-V-05", CarreraId = 1, Nombre = "Evaluación de Proyectos Informáticos", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-V-06", CarreraId = 1, Nombre = "Inglés Técnico V", Creditos = 3, Prerrequisitos = { "ISI-IV-07" } });
+
+        // ---------- Semestre VI ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-VI-01", CarreraId = 1, Nombre = "Ingeniería del Software II", Creditos = 4, Prerrequisitos = { "ISI-V-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VI-02", CarreraId = 1, Nombre = "Desarrollo de Aplicaciones III", Creditos = 4, Prerrequisitos = { "ISI-IV-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VI-03", CarreraId = 1, Nombre = "Sistemas Operativos", Creditos = 4, Prerrequisitos = { "ISI-V-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VI-04", CarreraId = 1, Nombre = "Inteligencia Artificial", Creditos = 4, Prerrequisitos = { "ISI-III-03", "ISI-IV-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VI-05", CarreraId = 1, Nombre = "Programación de Dispositivos Móviles", Creditos = 4, Prerrequisitos = { "ISI-IV-06" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VI-06", CarreraId = 1, Nombre = "Inglés Técnico VI", Creditos = 3, Prerrequisitos = { "ISI-V-06" } });
+
+        // ---------- Semestre VII ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-VII-01", CarreraId = 1, Nombre = "Ingeniería del Software III", Creditos = 4, Prerrequisitos = { "ISI-VI-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VII-02", CarreraId = 1, Nombre = "Desarrollo de Aplicaciones IV", Creditos = 4, Prerrequisitos = { "ISI-VI-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VII-03", CarreraId = 1, Nombre = "Redes de Computadoras I", Creditos = 4, Prerrequisitos = { "ISI-VI-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VII-04", CarreraId = 1, Nombre = "Almacenes de Datos y Minería", Creditos = 4, Prerrequisitos = { "ISI-V-02", "ISI-VI-04" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VII-05", CarreraId = 1, Nombre = "Emprendimiento y Gestión de Proyectos", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VII-06", CarreraId = 1, Nombre = "Inglés Técnico VII", Creditos = 3, Prerrequisitos = { "ISI-VI-06" } });
+
+        // ---------- Semestre VIII ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-VIII-01", CarreraId = 1, Nombre = "Redes de Computadoras II", Creditos = 4, Prerrequisitos = { "ISI-VII-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VIII-02", CarreraId = 1, Nombre = "Proyecto de Desarrollo de Software", Creditos = 4, Prerrequisitos = { "ISI-VII-01", "ISI-VII-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VIII-03", CarreraId = 1, Nombre = "Administración de Servidores I", Creditos = 4, Prerrequisitos = { "ISI-VII-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VIII-04", CarreraId = 1, Nombre = "Teoría de Lenguajes y Compiladores", Creditos = 4, Prerrequisitos = { "ISI-III-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VIII-05", CarreraId = 1, Nombre = "Ética y Deontología Profesional", Creditos = 3, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-VIII-06", CarreraId = 1, Nombre = "Electiva Profesional I", Creditos = 2, Prerrequisitos = { } });
+
+        // ---------- Semestre IX ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-IX-01", CarreraId = 1, Nombre = "Administración de Servidores II", Creditos = 4, Prerrequisitos = { "ISI-VIII-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IX-02", CarreraId = 1, Nombre = "Seguridad Informática", Creditos = 4, Prerrequisitos = { "ISI-VIII-01", "ISI-VIII-03" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IX-03", CarreraId = 1, Nombre = "Auditorías Informáticas", Creditos = 4, Prerrequisitos = { "ISI-IX-02" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IX-04", CarreraId = 1, Nombre = "Gestión de Proyectos Informáticos", Creditos = 3, Prerrequisitos = { "ISI-VII-05" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-IX-05", CarreraId = 1, Nombre = "Aprendizaje Automático", Creditos = 4, Prerrequisitos = { "ISI-VI-04", "ISI-VII-04" } });
+
+        // ---------- Semestre X ----------
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-01", CarreraId = 1, Nombre = "Trabajo de Diploma I", Creditos = 8, Prerrequisitos = { "ISI-IX-01", "ISI-IX-03", "ISI-IX-04" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-02", CarreraId = 1, Nombre = "Práctica Profesional Supervisada", Creditos = 4, Prerrequisitos = { "ISI-VIII-05" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-03", CarreraId = 1, Nombre = "Trabajo de Diploma II", Creditos = 8, Prerrequisitos = { "ISI-X-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-04", CarreraId = 1, Nombre = "Seminario de Titulación", Creditos = 4, Prerrequisitos = { "ISI-X-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-05", CarreraId = 1, Nombre = "Electiva Profesional II", Creditos = 2, Prerrequisitos = { } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-06", CarreraId = 1, Nombre = "Gestión de la Calidad del Software", Creditos = 3, Prerrequisitos = { "ISI-VII-01" } });
+        s.Cursos.Add(new Curso { Codigo = "ISI-X-07", CarreraId = 1, Nombre = "Sistemas de Información Ejecutivos", Creditos = 4, Prerrequisitos = { "ISI-VII-04" } });
 
         // Ingeniería Civil — UNI
         s.Cursos.Add(new Curso { Codigo = "CV-201", CarreraId = 3, Nombre = "Cálculo I", Creditos = 5, Prerrequisitos = { } });
@@ -151,40 +225,42 @@ public static class DatosIniciales
     private static void CargarGruposYContratos(SistemaGestion s)
     {
         // ---------- Periodo 2026-I (finalizado; estado 0) ----------
-        s.Grupos.Add(new Grupo { Codigo = "G-IS101I", CursoCodigo = "IS-101", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Lunes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 45, CupoOcupado = 5, HorasPorClase = 2, Estado = 0 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS102I", CursoCodigo = "IS-102", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Miércoles", HoraInicio = new TimeSpan(9, 0, 0), HoraFin = new TimeSpan(11, 0, 0), ProfesorCedula = "001-150970-0004B", Cupo = 45, CupoOcupado = 1, HorasPorClase = 2, Estado = 0 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS201I", CursoCodigo = "IS-201", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Martes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 40, CupoOcupado = 2, HorasPorClase = 2, Estado = 0 });
+        s.Grupos.Add(new Grupo { Codigo = "G-II01I", CursoCodigo = "ISI-II-01", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Lunes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 45, CupoOcupado = 5, HorasPorClase = 2, Estado = 0 });
+        s.Grupos.Add(new Grupo { Codigo = "G-III01I", CursoCodigo = "ISI-III-01", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Miércoles", HoraInicio = new TimeSpan(9, 0, 0), HoraFin = new TimeSpan(11, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 40, CupoOcupado = 1, HorasPorClase = 2, Estado = 0 });
+        s.Grupos.Add(new Grupo { Codigo = "G-III02I", CursoCodigo = "ISI-III-02", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Martes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-080775-0909D", Cupo = 35, CupoOcupado = 2, HorasPorClase = 2, Estado = 0 });
+        s.Grupos.Add(new Grupo { Codigo = "G-III04I", CursoCodigo = "ISI-III-04", Periodo = "2026-I", Modalidad = Modalidad.Regular, Dia = "Jueves", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-150970-0004B", Cupo = 35, CupoOcupado = 1, HorasPorClase = 2, Estado = 0 });
 
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-IS101I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-150970-0004B", GrupoCodigo = "G-IS102I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-IS201I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-II01I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-III01I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-III02I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-150970-0004B", GrupoCodigo = "G-III04I", Periodo = "2026-I", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 1, 20), Estado = 0 });
 
         // ---------- Periodo 2026-II (actual; estado 1) ----------
         // Regular: diurno o vespertino entre semana.
-        s.Grupos.Add(new Grupo { Codigo = "G-IS101R", CursoCodigo = "IS-101", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Lunes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 45, CupoOcupado = 1, HorasPorClase = 2, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS201R", CursoCodigo = "IS-201", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Miércoles", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 40, CupoOcupado = 1, HorasPorClase = 2, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS301R", CursoCodigo = "IS-301", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Viernes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-080775-0909D", Cupo = 35, CupoOcupado = 1, HorasPorClase = 2, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS202R", CursoCodigo = "IS-202", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Viernes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-150970-0004B", Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS302V", CursoCodigo = "IS-302", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Martes", HoraInicio = new TimeSpan(17, 0, 0), HoraFin = new TimeSpan(19, 0, 0), ProfesorCedula = "001-210488-0007B", Cupo = 35, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS402R", CursoCodigo = "IS-402", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Jueves", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-210488-0007B", Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-CV201S", CursoCodigo = "CV-201", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Sábado", HoraInicio = new TimeSpan(8, 0, 0), HoraFin = new TimeSpan(12, 0, 0), ProfesorCedula = "001-150970-0004B", Cupo = 40, CupoOcupado = 0, HorasPorClase = 4, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-II01R", CursoCodigo = "ISI-II-01", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Lunes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 45, CupoOcupado = 1, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-III02R", CursoCodigo = "ISI-III-02", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Miércoles", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-020573-0845A", Cupo = 40, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-IV02R", CursoCodigo = "ISI-IV-02", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Viernes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-080775-0909D", Cupo = 35, CupoOcupado = 2, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-IV05R", CursoCodigo = "ISI-IV-05", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Viernes", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-150970-0004B", Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-V02V", CursoCodigo = "ISI-V-02", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Martes", HoraInicio = new TimeSpan(17, 0, 0), HoraFin = new TimeSpan(19, 0, 0), ProfesorCedula = "001-210488-0007B", Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-V01R", CursoCodigo = "ISI-V-01", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Jueves", HoraInicio = new TimeSpan(7, 0, 0), HoraFin = new TimeSpan(9, 0, 0), ProfesorCedula = "001-210488-0007B", Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
         // Grupo SIN profesor: permite demostrar la asignación de clases y el conflicto de horario.
-        s.Grupos.Add(new Grupo { Codigo = "G-IS303S", CursoCodigo = "IS-303", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Sábado", HoraInicio = new TimeSpan(8, 0, 0), HoraFin = new TimeSpan(10, 0, 0), ProfesorCedula = null, Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-IV01S", CursoCodigo = "ISI-IV-01", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Sábado", HoraInicio = new TimeSpan(8, 0, 0), HoraFin = new TimeSpan(10, 0, 0), ProfesorCedula = null, Cupo = 30, CupoOcupado = 0, HorasPorClase = 2, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-CV201S", CursoCodigo = "CV-201", Periodo = "2026-II", Modalidad = Modalidad.Regular, Dia = "Sábado", HoraInicio = new TimeSpan(8, 0, 0), HoraFin = new TimeSpan(12, 0, 0), ProfesorCedula = "001-150970-0004B", Cupo = 40, CupoOcupado = 0, HorasPorClase = 4, Estado = 1 });
 
         // Dominical: clases por encuentro los domingos.
-        s.Grupos.Add(new Grupo { Codigo = "G-IS101D", CursoCodigo = "IS-101", Periodo = "2026-II", Modalidad = Modalidad.Dominical, Dia = "Domingo", HoraInicio = new TimeSpan(8, 0, 0), HoraFin = new TimeSpan(12, 0, 0), ProfesorCedula = "001-031180-1012C", Cupo = 40, CupoOcupado = 0, HorasPorClase = 4, Estado = 1 });
-        s.Grupos.Add(new Grupo { Codigo = "G-IS201D", CursoCodigo = "IS-201", Periodo = "2026-II", Modalidad = Modalidad.Dominical, Dia = "Domingo", HoraInicio = new TimeSpan(13, 0, 0), HoraFin = new TimeSpan(17, 0, 0), ProfesorCedula = "001-031180-1012C", Cupo = 35, CupoOcupado = 0, HorasPorClase = 4, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-III01D", CursoCodigo = "ISI-III-01", Periodo = "2026-II", Modalidad = Modalidad.Dominical, Dia = "Domingo", HoraInicio = new TimeSpan(8, 0, 0), HoraFin = new TimeSpan(12, 0, 0), ProfesorCedula = "001-031180-1012C", Cupo = 40, CupoOcupado = 0, HorasPorClase = 4, Estado = 1 });
+        s.Grupos.Add(new Grupo { Codigo = "G-II01D", CursoCodigo = "ISI-II-01", Periodo = "2026-II", Modalidad = Modalidad.Dominical, Dia = "Domingo", HoraInicio = new TimeSpan(13, 0, 0), HoraFin = new TimeSpan(17, 0, 0), ProfesorCedula = "001-031180-1012C", Cupo = 35, CupoOcupado = 0, HorasPorClase = 4, Estado = 1 });
 
         // Contratos del periodo actual: dominical 60 h (C$ 24,000), regular 80 h (C$ 32,000).
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-IS101R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-IS201R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-031180-1012C", GrupoCodigo = "G-IS101D", Periodo = "2026-II", Horas = 60, TarifaHora = 400m, Salario = 24000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-031180-1012C", GrupoCodigo = "G-IS201D", Periodo = "2026-II", Horas = 60, TarifaHora = 400m, Salario = 24000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-IS301R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-210488-0007B", GrupoCodigo = "G-IS302V", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-210488-0007B", GrupoCodigo = "G-IS402R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
-        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-150970-0004B", GrupoCodigo = "G-IS202R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-II01R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-III02R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-IV02R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-150970-0004B", GrupoCodigo = "G-IV05R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
         s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-150970-0004B", GrupoCodigo = "G-CV201S", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-210488-0007B", GrupoCodigo = "G-V02V", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-210488-0007B", GrupoCodigo = "G-V01R", Periodo = "2026-II", Horas = 80, TarifaHora = 400m, Salario = 32000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-031180-1012C", GrupoCodigo = "G-III01D", Periodo = "2026-II", Horas = 60, TarifaHora = 400m, Salario = 24000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
+        s.Contratos.Add(new Contrato { Id = s.NuevoIdContrato(), ProfesorCedula = "001-031180-1012C", GrupoCodigo = "G-II01D", Periodo = "2026-II", Horas = 60, TarifaHora = 400m, Salario = 24000m, Fecha = new DateTime(2026, 8, 1), Estado = 1 });
     }
 
     // =====================================================================
@@ -291,23 +367,25 @@ public static class DatosIniciales
             s.Notas.Add(nota);
         }
 
-        // David Donaire: aprobó Introducción a la Programación I → puede inscribir Programación I.
-        Agregar("001-120703-0004A", "G-IS101I", 54, 34);   // 88 — Aprobado
+        // David Donaire: aprobó Fundamentos de Programación (ISI-II-01) → puede inscribir Desarrollo de Aplicaciones I.
+        Agregar("001-120703-0004A", "G-II01I", 54, 34);   // 88 — Aprobado
 
-        // Luis Bustos: aprobó IS-101, IS-102 y IS-201 → puede inscribir Programación II.
-        Agregar("001-240398-0002B", "G-IS101I", 52, 34);   // 86 — Aprobado
-        Agregar("001-240398-0002B", "G-IS102I", 45, 32);   // 77 — Aprobado
-        Agregar("001-240398-0002B", "G-IS201I", 48, 30);   // 78 — Aprobado
+        // Luis Bustos: aprobó ISI-II-01, ISI-III-01, ISI-III-02 e ISI-III-04 →
+        // puede inscribir Desarrollo de Aplicaciones II y Estadística General.
+        Agregar("001-240398-0002B", "G-II01I", 52, 34);   // 86 — Aprobado
+        Agregar("001-240398-0002B", "G-III01I", 45, 32);  // 77 — Aprobado
+        Agregar("001-240398-0002B", "G-III02I", 48, 30);  // 78 — Aprobado
+        Agregar("001-240398-0002B", "G-III04I", 44, 33);  // 77 — Aprobado
 
-        // María Silva: reprobó IS-101 con 35 → sin derecho a convocatoria (debe repetir el curso).
-        Agregar("001-120402-0015A", "G-IS101I", 20, 15);   // 35 — Reprobado sin derecho
+        // María Silva: reprobó ISI-II-01 con 35 → sin derecho a convocatoria (debe repetir el curso).
+        Agregar("001-120402-0015A", "G-II01I", 20, 15);   // 35 — Reprobado sin derecho
 
         // Daniel Zapata: 55 (35 + 20) → derecho a convocatoria; obtuvo 90 → tope 80 → aprobado.
-        Agregar("001-050801-0021C", "G-IS101I", 35, 20, 90); // Aprobado (por convocatoria)
+        Agregar("001-050801-0021C", "G-II01I", 35, 20, 90); // Aprobado (por convocatoria)
 
-        // Kenny Mendoza: aprobó IS-101 e IS-201 → puede inscribir Programación II.
-        Agregar("001-020900-0011A", "G-IS101I", 40, 22);   // 62 — Aprobado
-        Agregar("001-020900-0011A", "G-IS201I", 42, 22);   // 64 — Aprobado
+        // Kenny Mendoza: aprobó ISI-II-01 e ISI-III-02 → puede inscribir Desarrollo de Aplicaciones II.
+        Agregar("001-020900-0011A", "G-II01I", 40, 22);   // 62 — Aprobado
+        Agregar("001-020900-0011A", "G-III02I", 42, 22);  // 64 — Aprobado
     }
 
     // =====================================================================
@@ -315,25 +393,25 @@ public static class DatosIniciales
     // =====================================================================
     private static void CargarPeriodoActual(SistemaGestion s)
     {
-        // Luis Bustos inscrito en Programación II (nota pendiente).
+        // Luis Bustos inscrito en Desarrollo de Aplicaciones II (nota pendiente).
         s.Inscripciones.Add(new Inscripcion
         {
             Id = s.NuevoIdInscripcion(), EstudianteCedula = "001-240398-0002B",
-            GrupoCodigo = "G-IS301R", Periodo = "2026-II", Fecha = new DateTime(2026, 8, 10), Estado = 1
+            GrupoCodigo = "G-IV02R", Periodo = "2026-II", Fecha = new DateTime(2026, 8, 10), Estado = 1
         });
 
-        // María Silva reinscrita en Introducción a la Programación I (nota pendiente).
+        // María Silva reinscrita en Fundamentos de Programación (nota pendiente).
         s.Inscripciones.Add(new Inscripcion
         {
             Id = s.NuevoIdInscripcion(), EstudianteCedula = "001-120402-0015A",
-            GrupoCodigo = "G-IS101R", Periodo = "2026-II", Fecha = new DateTime(2026, 8, 10), Estado = 1
+            GrupoCodigo = "G-II01R", Periodo = "2026-II", Fecha = new DateTime(2026, 8, 10), Estado = 1
         });
 
-        // Kenny Mendoza inscrito en Programación I con nota ya registrada (78).
+        // Kenny Mendoza inscrito en Desarrollo de Aplicaciones II con nota ya registrada (78).
         Inscripcion inscKenny = new()
         {
             Id = s.NuevoIdInscripcion(), EstudianteCedula = "001-020900-0011A",
-            GrupoCodigo = "G-IS201R", Periodo = "2026-II", Fecha = new DateTime(2026, 8, 10), Estado = 1
+            GrupoCodigo = "G-IV02R", Periodo = "2026-II", Fecha = new DateTime(2026, 8, 10), Estado = 1
         };
         s.Inscripciones.Add(inscKenny);
         s.Notas.Add(new Nota { InscripcionId = inscKenny.Id, Acumulado = 48, Examen = 30 }); // 78 — Aprobado
@@ -346,32 +424,32 @@ public static class DatosIniciales
     {
         s.Asistencias.Add(new Asistencia
         {
-            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-IS301R",
+            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-IV02R",
             Fecha = new DateTime(2026, 10, 16), HoraMarcada = new TimeSpan(6, 55, 0), Presente = true,
             HorasDescontadas = 0, Estado = 1
         });
         // Ausencia: se descuentan 2 horas × C$ 400 = C$ 800 en la planilla.
         s.Asistencias.Add(new Asistencia
         {
-            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-IS301R",
+            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-080775-0909D", GrupoCodigo = "G-IV02R",
             Fecha = new DateTime(2026, 10, 23), HoraMarcada = null, Presente = false,
             HorasDescontadas = 2, Estado = 1
         });
         s.Asistencias.Add(new Asistencia
         {
-            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-210488-0007B", GrupoCodigo = "G-IS402R",
+            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-210488-0007B", GrupoCodigo = "G-V01R",
             Fecha = new DateTime(2026, 10, 15), HoraMarcada = new TimeSpan(6, 58, 0), Presente = true,
             HorasDescontadas = 0, Estado = 1
         });
         s.Asistencias.Add(new Asistencia
         {
-            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-IS101R",
+            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-020573-0845A", GrupoCodigo = "G-II01R",
             Fecha = new DateTime(2026, 10, 19), HoraMarcada = new TimeSpan(7, 0, 0), Presente = true,
             HorasDescontadas = 0, Estado = 1
         });
         s.Asistencias.Add(new Asistencia
         {
-            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-031180-1012C", GrupoCodigo = "G-IS101D",
+            Id = s.NuevoIdAsistencia(), ProfesorCedula = "001-031180-1012C", GrupoCodigo = "G-III01D",
             Fecha = new DateTime(2026, 10, 18), HoraMarcada = new TimeSpan(7, 48, 0), Presente = true,
             HorasDescontadas = 0, Estado = 1
         });
